@@ -43,6 +43,28 @@ void insertInFront(int element){
     }
 }
 
+
+void insertInPosition(int pos,int element){
+    struct node *temp,*p,*q;
+    temp=(struct node * )malloc(sizeof(struct node));
+    temp->data=element;
+    temp->link=NULL;
+
+    if(pos==0){
+        insertInFront(element);
+        return;
+    }
+    int i;
+    p=head;
+    q=head;
+    for(i=0;i<pos-2;i++){
+        p=p->link;
+    }
+    temp->link=p->link;
+    p->link=temp;
+
+}
+
 void deleteInEnd(){
      struct node *p,*j;
      p=head;
@@ -64,6 +86,25 @@ void deleteInFront(){
     free(p);
 }
 
+void deleteInPosition(int pos){
+    struct node *p,*q;
+    if(pos==0){
+        deleteInEnd();
+        return;
+    }
+    int i;
+    p=head;
+    q=head;
+    for(i=0;i<pos-2;i++){
+        p=p->link;
+        q=p->link;
+    }
+    p->link=q->link;
+    q->link=NULL;
+
+}
+
+
 
 
 
@@ -83,6 +124,8 @@ int main()
     insertInEnd(10);
     insertInEnd(20);
     insertInEnd(30);
+    insertInEnd(40);
+    insertInEnd(50);
     displayElements();
 
     insertInFront(5);
@@ -99,6 +142,13 @@ int main()
 
     deleteInFront();
     displayElements();
+
+    insertInPosition(3,25);
+    displayElements();
+
+    deleteInPosition(4);
+    displayElements();
+
 
     return 0;
 }
