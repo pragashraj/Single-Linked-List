@@ -104,7 +104,21 @@ void deleteInPosition(int pos){
 
 }
 
+void printMiddle()
+{
+    struct node *slow_ptr = head;
+    struct node *fast_ptr = head;
 
+    if (head!=NULL)
+    {
+        while (fast_ptr != NULL && fast_ptr->link != NULL)
+        {
+            fast_ptr = fast_ptr->link->link;
+            slow_ptr = slow_ptr->link;
+        }
+        printf("The middle element is %d\n\n", slow_ptr->data);
+    }
+}
 
 
 
@@ -146,8 +160,10 @@ int main()
     insertInPosition(3,25);
     displayElements();
 
-    deleteInPosition(4);
-    displayElements();
+   /* deleteInPosition(4);
+    displayElements();*/
+
+    printMiddle();
 
 
     return 0;
